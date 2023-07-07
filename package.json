@@ -13,10 +13,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^29.6.1"
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.22.8",
+    "@babel/preset-env": "^7.22.7",
+    "jest": "^25.0.0"
   },
   "dependencies": {
     "inquirer": "^9.2.7"
   }
 }
-

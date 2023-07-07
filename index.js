@@ -1,31 +1,37 @@
-const { collectUserInput } = require('./lib/userInput');
+const collectUserInput = require('./lib/userInput').default;
 const { Triangle, Circle, Square } = require('./lib/shapes');
 const { saveToFile } = require('./lib/fileUtils');
 
 const generateLogo = async () => {
-    const userInput = await collectUserInput();
-    let shape;
-    switch (userInput.shape) {
-        case 'Triangle':
-            shape = new Triangle();
-            break;
-        case 'Circle':
-            shape = new Circle();
-            break;
-        case 'Square':
-                shape = new Square();
-                break;
-                default:
-    }
+  const userInput = await collectUserInput();
+  let shape;
 
-shape.setColor(userInput.shapeColor);
-shape.setText(userInput.text);
+  switch (userInput.shape) {
+    case 'Triangle':
+      shape = new Triangle();
+      break;
+    case 'Circle':
+      shape = new Circle();
+      break;
+    case 'Square':
+      shape = new Square();
+      break;
+    default:
+      // Handle default case
+      break;
+  }
 
-const svgLogo = shape.render();
+  shape.setColor(userInput.shapeColor);
 
-saveToFile('logo.svg', svgLogo);
+  if (shape.setText) {
+    shape.setText(userInput.text);
+  }
 
-console.log('Generate logo.svg');
+  const svgLogo = shape.render();
+
+  saveToFile('logo.svg', svgLogo);
+
+  console.log('Generated logo.svg');
 };
 
 generateLogo();
