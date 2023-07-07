@@ -6,18 +6,7 @@
 
 ## Description
 
-
-## The Task
-
-
-
-
-##  Features :
-
-1) 
-2) 
-3) 
-4) 
+This is an application for web developers to create a simple logo for a client without having to pay high dollar graphic designers. Using inquirer, the user can prompt the logo to display three characters (ex.ABC), a choice of three shapes (triangle, circle or square) and select a color for the shape.
 
 
 <br></br>
@@ -54,7 +43,7 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
 # UI SneakPeak ❤️ 
 
-![Alt text]
+
 
 <br><br>
 
