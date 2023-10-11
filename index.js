@@ -1,37 +1,69 @@
-const collectUserInput = require('./lib/userInput').default;
-const { Triangle, Circle, Square } = require('./lib/shapes');
-const { saveToFile } = require('./lib/fileUtils');
+const inquirer = require("inquirer");
+const fs = require("fs");
+const Logo = require("./lib/file")
 
-const generateLogo = async () => {
-  const userInput = await collectUserInput();
-  let shape;
+const svgDir          =  "./lib";
+const svgFileName     =  "svgLogo.svg";
+const logoText        =  "logoText";
+const logoTextColor   =  "logoTextColor";
+const logoShape       =  "logoShape";
+const logoShapeColor  =  "logoShapeColor";
 
-  switch (userInput.shape) {
-    case 'Triangle':
-      shape = new Triangle();
-      break;
-    case 'Circle':
-      shape = new Circle();
-      break;
-    case 'Square':
-      shape = new Square();
-      break;
-    default:
-      // Handle default case
-      break;
+const questions = [
+  {
+      type: "input",
+      message: "Type in logo text (three letter maximum):",
+      name: logoText
+  },
+  {
+      type: "input",
+      message: "Type in desired color to logo text (hex number or color keyword):",
+      name: logoTextColor
+  },
+  {
+      type: "list",
+      message: "Select a shape for the logo:",
+      name: logoShape,
+      choices: [
+          "Circle",
+          "Triangle",
+          "Square",
+      ]
+  },
+  {
+      type: "input",
+      message: "Type in desired color for logo shape (hex number of color keyword)",
+      name: logoShapeColor
   }
+];
 
-  shape.setColor(userInput.shapeColor);
+/**
+ * Generates SVG file using the rendered logo.
+ * @param {string} renderedLogo rendered logo according to user specifications
+ */
+function createSvgFile(renderedLogo) {
 
-  if (shape.setText) {
-    shape.setText(userInput.text);
-  }
+fs.writeFileSync(`${svgDir}/${svgFileName}`, renderedLogo, (error) => {
+error ? console.log(error) : console.log("Success!");
+});
+}
 
-  const svgLogo = shape.render();
+function generateSvgLogo(userInput) {
+let renderedLogo = ""
+try {
+const svgLogo = new Logo(userInput);
+renderedLogo = svgLogo.render();
+} catch (error) {
+console.log(error);
+}
 
-  saveToFile('logo.svg', svgLogo);
+createSvgFile(renderedLogo);
+}
 
-  console.log('Generated logo.svg');
-};
+function init() {
+inquirer
+.prompt(questions)
+.then(response => generateSvgLogo(response));
+}
 
-generateLogo();
+init();

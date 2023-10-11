@@ -1,28 +1,9 @@
 {
-  "name": "oop-logo-maker",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/LarryByrd89/oop-logo-maker"
-  },
   "scripts": {
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.22.8",
-    "@babel/preset-env": "^7.22.7",
-    "jest": "^25.0.0"
-  },
   "dependencies": {
-    "inquirer": "^9.2.7"
+    "inquirer": "^8.2.4",
+    "jest": "^29.5.0"
   }
 }
